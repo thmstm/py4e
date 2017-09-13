@@ -1,2 +1,2 @@
 # py4e
-Python for Everybody codes
+Coursera - Python for Everybody codes
