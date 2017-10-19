@@ -49,9 +49,12 @@ CREATE TABLE Track (
 fname = input('Enter file name: ')
 if ( len(fname) < 1 ) : fname = 'Library.xml'
 
+#--- The structure of the of the interesting objects in the XML
 # <key>Track ID</key><integer>369</integer>
 # <key>Name</key><string>Another One Bites The Dust</string>
 # <key>Artist</key><string>Queen</string>
+
+#--- Defining a function to lookup the value of a 'key' tag
 def lookup(d, key):
     found = False
     for child in d:
@@ -78,11 +81,14 @@ for entry in all:
     rating = lookup(entry, 'Rating')
     length = lookup(entry, 'Total Time')
 
+    #--- If a data field is not found, then move on to the next element
     if name is None or artist is None or album is None or genre is None: 
         continue
 
+    #--- Printing the data field of the search result element for the user
     print(name, artist, album, genre, count, rating, length)
 
+    #--- Updating the relevant tables with the data field of the search result element
     cur.execute('''INSERT OR IGNORE INTO Artist (name) 
         VALUES ( ? )''', ( artist, ) )
     cur.execute('SELECT id FROM Artist WHERE name = ? ', (artist, ))
@@ -103,4 +109,5 @@ for entry in all:
         VALUES ( ?, ?, ?, ?, ?, ? )''', 
         ( name, album_id, genre_id, length, rating, count ) )
 
+    #--- Committing the changes
     conn.commit()
