@@ -1,6 +1,9 @@
 #===============================================================================
-# This programme uses the Google GeoCoding API to retrieve data and then
-# uses Google Maps to visualize the data.
+# This project uses the Google GeoCoding API to retrieve data and then uses
+# Google Maps to visualize the data.
+# This part of the project reads the data from a file, requests geocode of
+# the read location from the Google Maps Geocoding API and writes the results
+# into a database.
 #===============================================================================
 
 #--- Importing libraries
